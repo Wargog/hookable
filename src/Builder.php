@@ -50,7 +50,7 @@ class Builder extends EloquentBuilder
      */
     public function callParent($method, array $args)
     {
-        return call_user_func_array("parent::{$method}", $args);
+        return call_user_func_array(parent::class . "::{$method}", $args);
     }
 
     /**
@@ -259,14 +259,14 @@ class Builder extends EloquentBuilder
     /**
      * Add a "where null" clause to the query.
      *
-     * @param  string  $column
+     * @param  string  $columns
      * @param  string  $boolean
      * @param  bool    $not
      * @return $this
      */
-    public function whereNull($column, $boolean = 'and', $not = false)
+    public function whereNull($columns, $boolean = 'and', $not = false)
     {
-        return $this->callHook(__FUNCTION__, $this->packArgs(compact('column', 'boolean', 'not')));
+        return $this->callHook(__FUNCTION__, $this->packArgs(compact('columns', 'boolean', 'not')));
     }
 
     /**
@@ -283,13 +283,13 @@ class Builder extends EloquentBuilder
     /**
      * Add a "where not null" clause to the query.
      *
-     * @param  string  $column
+     * @param  string  $columns
      * @param  string  $boolean
      * @return $this
      */
-    public function whereNotNull($column, $boolean = 'and')
+    public function whereNotNull($columns, $boolean = 'and')
     {
-        return $this->whereNull($column, $boolean, true);
+        return $this->whereNull($columns, $boolean, true);
     }
 
     /**
@@ -323,11 +323,11 @@ class Builder extends EloquentBuilder
      *
      * @param  string  $column
      * @param  string   $operator
-     * @param  int   $value
+     * @param  \DateTimeInterface|null|string   $value
      * @param  string   $boolean
      * @return $this
      */
-    public function whereDate($column, $operator, $value, $boolean = 'and')
+    public function whereDate($column, $operator, $value = null, $boolean = 'and')
     {
         return $this->addDateBasedWhere('Date', $column, $operator, $value, $boolean);
     }
@@ -337,11 +337,11 @@ class Builder extends EloquentBuilder
      *
      * @param  string  $column
      * @param  string   $operator
-     * @param  int   $value
+     * @param  \DateTimeInterface|null|string   $value
      * @param  string   $boolean
      * @return $this
      */
-    public function whereDay($column, $operator, $value, $boolean = 'and')
+    public function whereDay($column, $operator, $value = null, $boolean = 'and')
     {
         return $this->addDateBasedWhere('Day', $column, $operator, $value, $boolean);
     }
@@ -351,11 +351,11 @@ class Builder extends EloquentBuilder
      *
      * @param  string  $column
      * @param  string   $operator
-     * @param  int   $value
+     * @param  \DateTimeInterface|null|string   $value
      * @param  string   $boolean
      * @return $this
      */
-    public function whereMonth($column, $operator, $value, $boolean = 'and')
+    public function whereMonth($column, $operator, $value = null, $boolean = 'and')
     {
         return $this->addDateBasedWhere('Month', $column, $operator, $value, $boolean);
     }
@@ -365,11 +365,11 @@ class Builder extends EloquentBuilder
      *
      * @param  string  $column
      * @param  string   $operator
-     * @param  int   $value
+     * @param  \DateTimeInterface|null|string   $value
      * @param  string   $boolean
      * @return $this
      */
-    public function whereYear($column, $operator, $value, $boolean = 'and')
+    public function whereYear($column, $operator, $value = null, $boolean = 'and')
     {
         return $this->addDateBasedWhere('Year', $column, $operator, $value, $boolean);
     }
@@ -460,10 +460,10 @@ class Builder extends EloquentBuilder
      * Execute an aggregate function on the database.
      *
      * @param  string  $function
-     * @param  array   $columns
+     * @param  array|string[]   $columns
      * @return mixed
      */
-    public function aggregate($function, array $columns = ['*'])
+    public function aggregate($function, mixed $columns = ['*'])
     {
         $column = (reset($columns) !== '*') ? reset($columns) : null;
 

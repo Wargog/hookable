@@ -1,10 +1,10 @@
 {
-    "name": "sofa/hookable",
+    "name": "wargog/hookable",
     "description": "Laravel Eloquent hooks system.",
     "license": "MIT",
     "support": {
-        "issues": "https://github.com/jarektkaczyk/hookable/issues",
-        "source": "https://github.com/jarektkaczyk/hookable"
+        "issues": "https://github.com/wargog/hookable/issues",
+        "source": "https://github.com/wargog/hookable"
     },
     "keywords": ["eloquent", "laravel"],
     "authors": [
@@ -13,14 +13,20 @@
             "email": "jarek@softonsofa.com",
             "homepage": "https://softonsofa.com/",
             "role": "Developer"
+        },
+        {
+            "name": "Joshua Stroup",
+            "email": "jstroup@millvillemutual.com",
+            "homepage": "https://millvilleinsurancecompanies.com/",
+            "role": "Maintainer"
         }
     ],
     "require": {
-        "php": ">=7.0",
-        "illuminate/database": ">=5.4"
+        "php": ">=8.0",
+        "illuminate/database": "^v8.83.27"
     },
     "require-dev": {
-        "kahlan/kahlan": "~1.1"
+        "kahlan/kahlan": "^5.0"
     },
     "autoload": {
         "psr-4": {
